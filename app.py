@@ -58,7 +58,7 @@ def wait_for_nfc():
         print(token)
         
         # Return the redirection URL as a JSON response
-        redirect_url = f"http://localhost:8080/simba/external/api/v1/pad-dashboard/login?token={token}"
+        redirect_url = f"https://app-test-simba.azurewebsites.net/simba/external/api/v1/pad-dashboard/login?token={token}"
         return jsonify({"redirect_url": redirect_url})
     
     return jsonify({"error": "No NFC data received"}), 500
