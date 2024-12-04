@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waiting...</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/post.css') }}">
+</head>
+<body>
+    <div class="d-flex justify-content-center align-items-center h-100">
+        <div class="grid">
+            <div class="image">
+                <img class="rounded w-100 selector" id="randomImage">
+            </div>
+            <div class="card rounded border">
+                <h1 class="selector">Bienvenue sur SimPad</h1>
+                <h2 class="loading-text selector">En attente du badge</h2>
+                <div class="d-flex flex-column justify-content-end" style="height: 240px;">
+                    <div>
+                        <div onclick="toggleAccordion(1)" class="toggle-button toggle-button-top">
+                            <span>Je n&#39;ai pas mon badge.</span>
+                        </div>
+                        <div class="d-none no-badge-content toggle-content">
+                            <div class="d-flex">
+                                <p class="m-0">Si vous avez pas votre badge, pas de problèmes, vous pouvez également acheter les snacks avec
+                                    votre smartphone.</p>
+                                <img height="140px" src="{{ url_for('static', filename='Simba_files/simba-snacks-qrcode.svg') }}" alt="qrcode">
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div onclick="toggleAccordion(2)" class="toggle-button toggle-button-bottom">
+                            <span>Je n&#39;ai pas de compte.</span>
+                        </div>
+                        <div class="d-none no-account-content toggle-content">
+                            <div class="d-flex">
+                                <p class="m-0">Pour pouvoir utiliser SimPad (la tablette de l&#39;application Simba), vous devez déjà vous être
+                                    connecter à
+                                    l&#39;application depuis un ordinateur avec ce lien <a class="fake-link">https://app-simba.azurewebsites.net/simba</a> oubien avec votre smartphone avec ce QR code:
+                                </p>
+                                <img height="140px" src="{{ url_for('static', filename='Simba_files/simba-home-qrcode.svg') }}" alt="qrcode">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="badge-card elevation-3 selector" id="cardBadge">
+        <div class="ps-3 d-flex justify-content-between">
+            <img src="{{ url_for('static', filename='Simba_files/simba-pp.jpg') }}" alt="simba-pp" class="profile-picture mb-2 mt-3">
+            <span class="id-post mt-3">ID-Post</span>
+            <div>
+                <img src="{{ url_for('static', filename='Simba_files/Swiss_Post_logo_2023.png') }}" alt="post-logo" class="post-logo">
+            </div>
+        </div>
+        <div class="d-flex justify-content-between p-3 pt-0 badge-right">
+            <div>
+                <p class="name m-0">Simba</p>
+                <p class="sub-title">La Poste Suisse SA</p>
+            </div>
+            <div class="d-flex flex-column justify-content-end">
+                <p class="date m-0">15.10.2024</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="arrow-right"></div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" type="module"></script>
+  </body>
+</html>
