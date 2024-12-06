@@ -1,7 +1,8 @@
 from flask import Flask, render_template, redirect, url_for, jsonify, request
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 import nfc
 import jwt
-import time
 import base64
 SECRET_KEY = '069332689e9ea429cbe681fbe05b3c403490a38208a0d15cbe967069d18490b7'
 ALGORITHM = 'HS256'
@@ -53,12 +54,17 @@ def wait_for_nfc():
     cardUID = read_nfc()
     if cardUID:
         # Create the JWT token with the NFC data
-        token = jwt.encode({"card_uid": cardUID}, get_signing_key(), algorithm=ALGORITHM)
+        utc_time = datetime.utcnow()
+        local_time = utc_time.replace(tzinfo=ZoneInfo("UTC")).astimezone(ZoneInfo("Europe/Zurich")) + timedelta(seconds=300)
+        print("Local time:", local_time)
+        token = jwt.encode({"card_uid": cardUID, "exp": local_time}, get_signing_key(), algorithm=ALGORITHM)
         print(cardUID)
         print(token)
         
         # Return the redirection URL as a JSON response
         redirect_url = f"https://app-test-simba.azurewebsites.net/simba/external/api/v1/pad-dashboard/login?token={token}"
+        #redirect_url = f"http://localhost:8080/simba/external/api/v1/pad-dashboard/login?token={token}"
+
         return jsonify({"redirect_url": redirect_url})
     
     return jsonify({"error": "No NFC data received"}), 500

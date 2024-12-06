@@ -1,9 +1,10 @@
-const RANDOM_IMAGE_URL = "https://app-test-simba.azurewebsites.net/simba/external/api/v1/pad-dashboard/image";
+ const RANDOM_IMAGE_URL = "http://localhost:8080/simba/external/api/v1/pad-dashboard/image";
+//const RANDOM_IMAGE_URL = "https://app-test-simba.azurewebsites.net/simba/external/api/v1/pad-dashboard/image";
 
 document.addEventListener("load", onInit());
 
 function onInit(){
-    document.getElementById("randomImage").src = RANDOM_IMAGE_URL;
+    loadRandomImage();
 }
 
 const badgeCard = document.querySelector('.badge-card');
@@ -33,7 +34,21 @@ async function fetchData() {
       console.error('Error calling the API:', error);
   }
 }
+async function loadRandomImage() {
+    try {
+        // Call the `/image` endpoint to get the image URL
+        const response = await fetch(RANDOM_IMAGE_URL);
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch image: ${response.statusText}`);
+        }
 
+        // Parse the image URL from the response
+        document.getElementById("randomImage").src = await response.text();
+    } catch (error) {
+        console.error('Error loading random image:', error);
+    }
+}
 function launchAnimation() {
     return new Promise((resolve) => {
         console.log("test 3");
