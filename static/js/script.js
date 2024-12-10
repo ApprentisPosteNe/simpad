@@ -1,5 +1,5 @@
  //const RANDOM_IMAGE_URL = "http://localhost:8080/simba/external/api/v1/pad-dashboard/image";
-const RANDOM_IMAGE_URL = "https://app-test-simba.azurewebsites.net/simba/external/api/v1/pad-dashboard/image";
+const RANDOM_IMAGE_URL = "https://app-simba.azurewebsites.net/simba/external/api/v1/pad-dashboard/image";
 
 document.addEventListener("load", onInit());
 
