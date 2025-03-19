@@ -71,3 +71,13 @@ def wait_for_nfc():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+@app.route('/get-pig-login', methods=['GET'])
+def get_PigLogin():
+    utc_time = datetime.utcnow()
+    local_time = utc_time.replace(tzinfo=ZoneInfo("UTC")).astimezone(ZoneInfo("Europe/Zurich")) + timedelta(minutes=5)
+    token = jwt.encode({"card_uid": "pigUid", "exp": local_time}, get_signing_key(), algorithm=ALGORITHM)
+    redirect_url = f"https://app-test-simba.azurewebsites.net/simba/external/api/v1/pad-dashboard/login?token={token}&user=pig"
+    return jsonify({"redirect_url": redirect_url})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
