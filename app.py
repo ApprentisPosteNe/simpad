@@ -77,9 +77,6 @@ def wait_for_nfc():
     
     return jsonify({"error": "No NFC data received"}), 500
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
-    
 @app.route('/get-pig-login', methods=['GET'])
 def get_PigLogin():
     utc_time = datetime.utcnow()
@@ -90,3 +87,5 @@ def get_PigLogin():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+    
+
